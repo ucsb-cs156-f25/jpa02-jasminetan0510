@@ -28,4 +28,72 @@ public class TeamTest {
         assertEquals("Team(name=test-team, members=[])", team.toString());
     }
 
+    @Test
+    public void equals_same_obj() {
+        assertEquals(true, team.equals(team));
+    }
+
+    @Test
+    public void equals_diff_class() {
+        String str = new String("Hello");
+        assertEquals(false, team.equals(str));
+    }
+
+
+    //double check that this should be false??
+    @Test
+    public void equals_same_name_same_members() {
+        Team t = new Team();
+        t.setName("f25-05");
+        t.addMember("Brian");
+        t.addMember("Hechenjin");
+        t.addMember("Jasmine");
+        t.addMember("Kennedy");
+        t.addMember("Melvin");
+        t.addMember("Mon");
+        assertEquals(false, team.equals(t));
+    }
+
+    @Test
+    public void equals_same_name_diff_members() {
+        Team t = new Team();
+        t.setName("f25-05");
+        t.addMember("diff member");
+        assertEquals(false, team.equals(t));
+    }
+
+    @Test
+    public void equals_diff_name_same_members() {
+        Team t = new Team();
+        t.setName("diff name");
+        t.addMember("Brian");
+        t.addMember("Hechenjin");
+        t.addMember("Jasmine");
+        t.addMember("Kennedy");
+        t.addMember("Melvin");
+        t.addMember("Mon");
+        assertEquals(false, team.equals(t));
+    }
+
+    @Test
+    public void equals_diff_name_diff_members() {
+        Team t = new Team();
+        t.setName("diff name");
+        t.addMember("diff member");
+        assertEquals(false, team.equals(t));
+    }
+
+    @Test
+    public void hashCode_returns_correct_hashcode() {
+        Team t1 = new Team();
+        t1.setName("foo");
+        t1.addMember("bar");
+        Team t2 = new Team();
+        t2.setName("foo");
+        t2.addMember("bar");
+        assertEquals(t1.hashCode(), t2.hashCode());
+        int result = t1.hashCode();
+        int expectedResult = 130294;
+        assertEquals(expectedResult, result);
+    }
 }
