@@ -11,7 +11,9 @@ public class TeamTest {
 
     @BeforeEach
     public void setup() {
-        team = new Team("test-team");    
+        team = new Team("test-team");  
+        team.addMember("test-member1");
+        team.addMember("test-member2");  
     }
 
     @Test
@@ -25,7 +27,7 @@ public class TeamTest {
 
     @Test
     public void toString_returns_correct_string() {
-        assertEquals("Team(name=test-team, members=[])", team.toString());
+        assertEquals("Team(name=test-team, members=[test-member1, test-member2])", team.toString());
     }
 
     @Test
@@ -39,47 +41,37 @@ public class TeamTest {
         assertEquals(false, team.equals(str));
     }
 
-
-    //double check that this should be false??
     @Test
     public void equals_same_name_same_members() {
         Team t = new Team();
-        t.setName("f25-05");
-        t.addMember("Brian");
-        t.addMember("Hechenjin");
-        t.addMember("Jasmine");
-        t.addMember("Kennedy");
-        t.addMember("Melvin");
-        t.addMember("Mon");
-        assertEquals(false, team.equals(t));
+        t.setName("test-team");
+        t.addMember("test-member1");
+        t.addMember("test-member2");
+        assertEquals(true, team.equals(t));
     }
 
     @Test
     public void equals_same_name_diff_members() {
         Team t = new Team();
-        t.setName("f25-05");
-        t.addMember("diff member");
+        t.setName("test-team");
+        t.addMember("test-member3");
         assertEquals(false, team.equals(t));
     }
 
     @Test
     public void equals_diff_name_same_members() {
         Team t = new Team();
-        t.setName("diff name");
-        t.addMember("Brian");
-        t.addMember("Hechenjin");
-        t.addMember("Jasmine");
-        t.addMember("Kennedy");
-        t.addMember("Melvin");
-        t.addMember("Mon");
+        t.setName("diff-test-team");
+        t.addMember("test-member1");
+        t.addMember("test-member2");
         assertEquals(false, team.equals(t));
     }
 
     @Test
     public void equals_diff_name_diff_members() {
         Team t = new Team();
-        t.setName("diff name");
-        t.addMember("diff member");
+        t.setName("diff-test-team");
+        t.addMember("test-member3");
         assertEquals(false, team.equals(t));
     }
 
